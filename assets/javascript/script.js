@@ -28,9 +28,9 @@ function writePassword() {
         var passwordLength = prompt("how long would you\nlike your password?\n8-128 charactors",);
         console.log(passwordLength);
 
-        // for loop i <= passwordLength.  
+        // for loop i <= passwordLength.Length 
        
-        if(passwordLength < 8 || passwordLength > 128){
+        if(passwordLength < 8 || passwordLength > 128 || passwordLength !== Number){
             alert("your password must \nbe at least 8 charactors\n and no more than 128.\n please try again."); 
             generatePassword();
             //need to create main array to choose charactors from
@@ -87,7 +87,8 @@ function writePassword() {
         var totalArray = [...totalString];
         console.log(totalArray);
 
-        for(i=0; i <= passwordLength; i++) {
+        for(i=0; i < passwordLength; i++) {
+            //just greater than or greater than equal to? it's comparing regular numbers to an index probably so it should end one lower
             console.log("password length =" + passwordLength);
            var index = Math.floor(Math.random() * totalArray.length);
             password += totalArray[index];
