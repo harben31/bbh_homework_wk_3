@@ -10,12 +10,13 @@ function writePassword() {
     var alphaUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     var alphaLower = "abcdefghijklmnopqrstuvwxyz";
     var numbers = "1234567890";
-    var charactors = " !\"#$%&'()*+-./<:=;>?@[]^_`{}|~";
+    var charactors = "!\"#$%&'()*+-./<:=;>?@[]^_`{}| ~";
 
     var mainString = "";
-    var mainArray = [];
 
-    var password = "";
+    var promiseString = [];
+
+    var password = [];
 
     function generatePassword(){
         //need to ask user 5 things when this function is called.
@@ -30,7 +31,7 @@ function writePassword() {
 
         // for loop i <= passwordLength.Length 
        
-        if(passwordLength < 8 || passwordLength > 128 || passwordLength !== Number){
+        if(passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)===true){
             alert("your password must \nbe at least 8 charactors\n and no more than 128.\n please try again."); 
             generatePassword();
             //need to create main array to choose charactors from
@@ -41,6 +42,8 @@ function writePassword() {
         
         if(conUpper){
             var mainString2 = mainString.concat(alphaUpper);
+            promiseString.push(alphaUpper[0]);
+            console.log(promiseString);
             console.log(mainString2);
             var conLower = confirm("Would you like to use\nlowercase letters");
         }else if(!conUpper){
@@ -51,6 +54,8 @@ function writePassword() {
 
         if(conLower){
             var mainString3 = mainString.concat(alphaLower);
+            promiseString.push(alphaLower[0]);
+            console.log(promiseString);
             console.log(mainString3);
             var conNumber = confirm("Would you like to use\nnumbers?");
         } else if(!conLower){
@@ -61,6 +66,8 @@ function writePassword() {
 
         if(conNumber) {
             var mainString4 = mainString.concat(numbers);
+            promiseString.push(numbers[0]);
+            console.log(promiseString);
             console.log(mainString4);
             var conCharactor = confirm("Would you like to use\nspecial charctors?");
         } else if(!conNumber){
@@ -71,6 +78,8 @@ function writePassword() {
 
         if(conCharactor) {
             var mainString5 = mainString.concat(charactors);
+            promiseString.push(charactors[0]);
+            console.log(promiseString);
             console.log(mainString5);
         } else if(!conCharactor){
             var mainString5 = mainString.concat("");
@@ -91,10 +100,17 @@ function writePassword() {
             //just greater than or greater than equal to? it's comparing regular numbers to an index probably so it should end one lower
             console.log("password length =" + passwordLength);
            var index = Math.floor(Math.random() * totalArray.length);
-            password += totalArray[index];
-            console.log(password);
+            password.push(totalArray[index]);
+            // console.log(password);
         }
 
+        for(i=0; i<promiseString.length; i++){
+            password[i] = promiseString[i];
+        }
+
+        password = password.join("");
+        console.log(password);
+        return password
     }
 
     generatePassword();
